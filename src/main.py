@@ -1,5 +1,4 @@
 import os
-import json
 import streamlit as st
 from groq import Groq
 import sqlite3
@@ -173,8 +172,9 @@ if user_prompt:
     # Display the SQL execution result
     if isinstance(query_result, list):
         if query_result:
-            st.chat_message("assistant").markdown("**Query Result:**")
-            st.table(query_result)
+            first_result = query_result[0]
+            first_value = list(first_result.values())[0]  # Adjust this based on structure of the query result
+            st.chat_message("assistant").markdown(f"**Query Result:** {first_value}")
         else:
             st.chat_message("assistant").markdown("**Query Result:** No records found.")
     else:
